@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android" id="com.flowsense.cordova.plugin" version="2.5.2">
+
+    <name>Flowsense</name>
+    <description>Flowsense Cordova Device Plugin</description>
+    <license>Apache 2.0</license>
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
+
+    <js-module src="www/FlowsensePlugin.js" name="Flowsense">
+        <clobbers target="Flowsense" />
+    </js-module>
+
+    <!-- ios -->
+    <platform name="ios">
+
+      <config-file target="config.xml" parent="/*">
+        <feature name="FlowsensePlugin">
+          <param name="ios-package" value="FlowsensePlugin"/>
+        </feature>
+      </config-file>
+
+      <header-file src="src/ios/FlowsensePlugin.h"/>
+      <source-file src="src/ios/FlowsensePlugin.m"/>
+      <framework src="src/ios/FlowsenseSDK.framework" custom="true" />
+      <framework src="src/ios/AWSCore.framework" custom="true" />
+      <framework src="src/ios/AWSKinesis.framework" custom="true" />
+    </platform>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <permission
+                android:name="${applicationId}.permission.C2D_MESSAGE"
+                android:protectionLevel="signature" />
+                <uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
+            </config-file>
+
+            <framework src="com.google.android.gms:play-services-gcm:11.0.4" />
+
+            <config-file target="res/xml/config.xml" parent="/*">
+                <feature name="FlowsensePlugin">
+                    <param name="android-package"
+                        value="com.flowsense.cordova.plugin.FlowsensePlugin" />
+                        <param name="onload" value="true" />
+                    </feature>
+                </config-file>
+                <config-file target="AndroidManifest.xml" parent="/manifest/application">
+                </config-file>
+
+                <source-file src="colors.xml" target-dir="res/values/"/>
+                <source-file src="src/android/FlowsensePlugin.java" target-dir="src/com/flowsense/cordova/plugin" />
+                <framework src="src/android/flowsense.gradle" custom="true" type="gradleReference"/>
+                <framework src="com.fasterxml.jackson.core:jackson-core:2.8.6"/>
+                <framework src="com.fasterxml.jackson.core:jackson-databind:2.8.6"/>
+                <resource-file src="src/android/FlowsenseSDK_4.0.1.1.aar" target="libs/FlowsenseSDK_4.0.1.1.aar" />
+
+                <config-file target="AndroidManifest.xml" parent="/*">
+                    <uses-permission android:name="android.permission.INTERNET" />
+                    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+                    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />'
+                    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+                    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+                    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+                    <uses-permission android:name="android.permission.WAKE_LOCK" />
+                    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
+                </config-file>
+            </platform>
+
+        </plugin>

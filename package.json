@@ -1,0 +1,16 @@
+{
+  "version": "2.5.3",
+  "name": "com.flowsense.cordova.plugin",
+  "cordova_name": "Flowsense Plugin",
+  "description": "Flowsense Plugin",
+  "platforms": [
+    "android",
+    "ios"
+  ],
+  "engines": [
+  {
+    "name": "cordova",
+    "version": ">=3.0.0"
+  }
+  ]
+}
